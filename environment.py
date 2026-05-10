@@ -1,5 +1,6 @@
 import random
 class ClassroomEnvironment:
+
     def __init__(self):
         self.reset()
 
@@ -9,6 +10,7 @@ class ClassroomEnvironment:
         self.light = random.randint(0, 1)
         self.device_state = 0
         return self.get_state()
+    
     def get_state(self):
         return (
             self.occupancy,
@@ -18,13 +20,14 @@ class ClassroomEnvironment:
         )
 
     def step(self, action):
-        
         self.device_state = action
         energy_used = action * 2
         if self.occupancy == 0 and action != 0:
             reward = -10
+        
         elif self.occupancy == 1 and action == 0:
             reward = -5
+        
         else:
             reward = 5 - energy_used
         
